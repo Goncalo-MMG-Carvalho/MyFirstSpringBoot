@@ -1,0 +1,39 @@
+package my.example.demo.model;
+
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Person {
+	private final UUID id;
+	private final String name; 
+	
+	public Person(	@JsonProperty("id") UUID id,
+					@JsonProperty("name") String name) {
+		
+		this.id = id;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		
+		if(o == null)
+			return false;
+		
+		if(!(o instanceof Person))
+			return false;
+		
+		Person other = (Person) o;
+		
+		return this.id.equals(other.getId());
+	}
+}
