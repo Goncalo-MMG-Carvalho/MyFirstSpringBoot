@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import my.example.demo.model.Person;
 import my.example.demo.service.PersonService;
 
@@ -28,7 +30,7 @@ public class PersonController {
 	}
 	
 	@PostMapping
-	public void addPerson(@RequestBody Person person) {
+	public void addPerson(@Valid @NotNull @RequestBody Person person) {
 		personservice.addPerson(person);
 	}
 	
@@ -48,7 +50,7 @@ public class PersonController {
 	}
 	
 	@PutMapping(path = "{id}")
-	public int updatePersonById(@PathVariable("id") UUID id, @RequestBody Person person) {
+	public int updatePersonById(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Person person) {
 		return personservice.updatePersonById(id, person);
 	}
 }
